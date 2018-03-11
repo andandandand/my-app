@@ -16,15 +16,14 @@ class App extends Component {
 
   		todos: [
 
-  			{id: 0, text: "Make dinner tonight!"},
-  			{id: 1, text: "Fold the laundry"},
-  			{id: 2, text: "Learn to make a React app"}
+  			{id: 0, text: "Achieve world peace"},
+  			{id: 1, text: "Return book to the library"},
+  			{id: 2, text: "Eat some broccoli"}
   		],
   		nextId: 3
   	}
 
   	this.addTodo = this.addTodo.bind(this);
-
   	this.removeTodo = this.removeTodo.bind(this);
 
 
@@ -32,12 +31,23 @@ class App extends Component {
 
 addTodo(todoText){
 
-	console.log("Todo added: ", todoText);
+	let todos = this.state.todos.slice();
+	todos.push({id: this.state.nextId, text: todoText})
+	this.setState({
+
+		todos: todos, 
+		nextId: ++this.state.nextId
+
+	});
 }
 
 removeTodo(id){
 
-	console.log("removing: ", id)
+		this.setState({
+
+			todos:this.state.todos.filter((todo, index) => todo.id !== id)
+
+		})
 
 }
   render() {
